@@ -2,6 +2,8 @@ package com.example.spring01.controller;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.spring01.model.PointDTO;
 
@@ -137,6 +140,7 @@ public class MainController {
 	
 	@RequestMapping("move.do")
 	public String move() throws Exception {
+		// encode(문자열, 문자셋)
 		String name = URLEncoder.encode("김철수", "utf-8");
 //		return "redirect:/result.do?name=" + name + "&age=20";
 //		String name = "김철수";
@@ -151,6 +155,12 @@ public class MainController {
 		model.addAttribute("name",name);
 		model.addAttribute("age", age);
 		return "test/result";
+	}
+	
+	@RequestMapping("mav.do")
+	public ModelAndView  mav( ) {
+		Map<String, Object> map = new HashMap<>();
+		return "";
 	}
 	 
 }
