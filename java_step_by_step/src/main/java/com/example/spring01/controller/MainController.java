@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.spring01.model.PointDTO;
@@ -172,5 +173,30 @@ public class MainController {
 		// 		- value :  값
 		return new ModelAndView("test/mav_result", "map", map);
 	}
+	
+	@RequestMapping("ajax.do")
+	public String ajax() {
+		return "test/ajax";	// ajax.jsp로 포워드
+	}
+	
+	/*
+	 	라이브러리를 추가 해야 한다.(pom.xml) - javascript에 비동기식으로 json 형식의 데이터 보내기
+	 	(error message - No converter found for return value of type)
+	  	jackson-annotations
+	  	jackson-databind
+	  	jackson-mapper-asl
+	 */
+	// 페이지로 이동이 아니라 데이터 자체를 리턴해야 하기 때문에
+	// @ResponseBody 라는 어노테이션을 써야 한다
+	
+	// @ResponseBody - 데이터 자체를 리턴한다 => json 형식
+	// { "name":"TV, "price",500000 }의 형식으로 데이터 전달
+	@RequestMapping("background.do")
+	public @ResponseBody ProductDTO background() {
+		ProductDTO dto = new ProductDTO("TV", 500000);
+		return dto;	// 데이터 자체를 리턴
+	}
+	
+	
 	 
 }
