@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.spring01.model.PointDTO;
+import com.example.spring01.model.ProductDTO;
 
 @Controller // 콘트롤러 bean
 public class MainController {
@@ -157,10 +158,19 @@ public class MainController {
 		return "test/result";
 	}
 	
+	// ModelAndView
+	// Model : 데이터 저장소
+	// View : 출력 페이지
 	@RequestMapping("mav.do")
 	public ModelAndView  mav( ) {
 		Map<String, Object> map = new HashMap<>();
-		return "";
+		map.put("dto", new ProductDTO("pen", 1000));
+		
+		// new ModelAndView(view, key, value) 
+		// 		- view : 보여주는 이동할 url page 주소
+		//		- key	: 키
+		// 		- value :  값
+		return new ModelAndView("test/mav_result", "map", map);
 	}
 	 
 }
