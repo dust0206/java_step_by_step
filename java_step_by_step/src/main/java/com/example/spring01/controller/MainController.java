@@ -197,6 +197,27 @@ public class MainController {
 		return dto;	// 데이터 자체를 리턴
 	}
 	
+	@RequestMapping("login.do")
+	public String login() {
+		
+		return "test/login";
+	}
+	
+	@RequestMapping("login_result.do")
+	public String login_result(@RequestParam String id, @RequestParam String pw, Model model) {
+//		public String login_result(String id, String pw, Model model) {		// @RequestParam을 넣어도 되고 않넣어도 된다. 앞의 form의 변수와 여기의 변수가 같아야 한다.
+		String result = "";
+		if(id.equals("kim") && pw.equals("1234")) {
+			result = "환영합니다.";
+		} else {
+			result = "아이디 또는 비밀번호가 틀렸습니다.";
+		}
+		
+		model.addAttribute("result", result);	// 모델에 저장하고
+		return "test/login_result";			// 출력페이지로 넘겼음
+		
+	}
+	
 	
 	 
 }
